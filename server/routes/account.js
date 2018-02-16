@@ -1,12 +1,12 @@
 const router = require('express').Router(),
 	jwt = require('jsonwebtoken');
 
-const User = require('../models/user'),
+const db = require('../models'),
 	auth = require('../middleware/auth');
 
 router.post('/signup', (req, res) => {
 	const { email, name, password, isSeller } = req.body;
-	user = new User({
+	user = new db.User({
 		email,
 		name,
 		password,
@@ -14,8 +14,8 @@ router.post('/signup', (req, res) => {
 	});
 	user.picture = user.gravatar();
 
-	User.findOne({ email }, (err, existingUser) => {
-		if (existingUser) {
+	db.User.findOne({ email }, (err, exists) => {
+		if (exists) {
 			res.json({
 				success: false,
 				message: 'Account with that email already exists'
@@ -34,17 +34,17 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {
 	const { email, password } = req.body;
-	User.findOne({ email }, (err, user) => {
+	db.User.findOne({ email }, (err, user) => {
 		if (err) throw err;
 
 		if (!user) {
 			res.json({
 				success: false,
-				message: 'User not found'
+				message: 'db.User not found'
 			});
 		} else {
-			let validPassword = user.comparePassword(password);
-			if (!validPassword) {
+			let valid = user.comparePassword(password);
+			if (!valid) {
 				res.json({
 					sucess: false,
 					message: 'Wrong password'
@@ -66,7 +66,7 @@ router.post('/login', (req, res) => {
 router
 	.route('/profile')
 	.get(auth, (req, res) => {
-		User.findOne({ _id: req.decoded.user._id }, (err, user) => {
+		db.User.findOne({ _id: req.decoded.user._id }, (err, user) => {
 			res.json({
 				success: true,
 				user,
@@ -75,7 +75,7 @@ router
 		});
 	})
 	.post(auth, (req, res, next) => {
-		User.findOne({ _id: req.decoded.user._id }, (err, user) => {
+		db.User.findOne({ _id: req.decoded.user._id }, (err, user) => {
 			if (err) return next(err);
 
 			const { email, password, name, isSeller } = req.body;
@@ -96,7 +96,7 @@ router
 router
 	.route('/address')
 	.get(auth, (req, res) => {
-		User.findOne({ _id: req.decoded.user._id }, (err, user) => {
+		db.User.findOne({ _id: req.decoded.user._id }, (err, user) => {
 			res.json({
 				success: true,
 				address: user.address,
@@ -105,7 +105,7 @@ router
 		});
 	})
 	.post(auth, (req, res, next) => {
-		User.findOne({ _id: req.decoded.user._id }, (err, user) => {
+		db.User.findOne({ _id: req.decoded.user._id }, (err, user) => {
 			if (err) return next(err);
 
 			const { addr1, addr2, city, state, country, postalCode } = req.body;
