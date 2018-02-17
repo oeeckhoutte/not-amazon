@@ -1,15 +1,16 @@
 <section id="categories">
   <div class="container p-5">
     <app-message></app-message>
+    <h4 class="display-4">Categories</h4>
     <hr>
     <div *ngIf="!categories" class="m-auto">
-      <div class="text-center display-3 mt-5">
+      <h1 class="text-center display-3 mt-5">
         <i class="fa fa-spinner fa-spin"></i>
-      </div>
+      </h1>
     </div>
     <div *ngIf="categories" class="list-group">
-      <a *ngFor="let category of categories" routerLink="/category/{{category._id}}" class="list-group-item list-group-item-action">
-        {{ category.name}}
+      <a *ngFor="let category of categories" routerLink="/categories/{{ category._id }}" class="list-group-item list-group-item-action">
+        {{ category.name }}
       </a>
     </div>
     <hr style="margin-top: 15rem;">
@@ -17,13 +18,13 @@
       <div class="card-body">
         <h4 class="card-title">Add New Category</h4>
         <hr>
-        <form class="form" (ngSubmit)="addCategory()">
+        <div class="form">
           <div class="form-group">
             <label>Category</label>
-            <input type="text" name="category" class="form-controul" [(ngModel)]="newCategory">
+            <input type="text" name="newCategory" class="form-control" [(ngModel)]="newCategory">
           </div>
-          <button type="submit" class="btn btn-info" [disabled]="btnDisabled">Add Category</button>
-        </form>
+          <button type="button" class="btn btn-info" (click)="addCategory()" [disabled]="btnDisabled">Add Category</button>
+        </div>
       </div>
     </div>
   </div>
