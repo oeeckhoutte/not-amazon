@@ -1,7 +1,8 @@
 const router = require('express').Router(),
 	aws = require('aws-sdk'),
 	multer = require('multer'),
-	multerS3 = require('multer-s3');
+	multerS3 = require('multer-s3'),
+	faker = require('faker');
 
 const db = require('../models'),
 	auth = require('../middleware/auth');
@@ -61,5 +62,20 @@ router
 			message: 'Successfully added product'
 		});
 	});
+
+router.get('/faker/test', (req, res, next) => {
+	for (i = 0; i < 20; i++) {
+		let product = new db.Product();
+		product.category = '5a86efd973646d04436982c3';
+		product.owner = '5a86595acb07640437ca4ff3';
+		product.image = faker.image.cats();
+		product.title = faker.commerce.productName();
+		product.description = faker.lorem.words();
+		product.price = faker.commerce.price();
+		product.save();
+	}
+
+	res.json({ message: 'Successfully added 20 pictures' });
+});
 
 module.exports = router;
