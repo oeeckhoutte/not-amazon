@@ -6,6 +6,12 @@ const ProductSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Category'
 	},
+	reviews: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Review'
+		}
+	],
 	owner: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
