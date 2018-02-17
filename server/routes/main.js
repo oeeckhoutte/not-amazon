@@ -41,6 +41,7 @@ router.get('/categories/:id', (req, res, next) => {
 					.limit(paginate)
 					.populate('category')
 					.populate('owner')
+					.populate('reviews')
 					.exec((err, products) => {
 						if (err) return next(err);
 						callback(err, products);
@@ -110,6 +111,7 @@ router.get('/product/:id', (req, res) => {
 	db.Product.findById(req.params.id)
 		.populate('category')
 		.populate('owner')
+		.deepPopulate('reviews.owner')
 		.exec((err, product) => {
 			if (err) {
 				res.json({

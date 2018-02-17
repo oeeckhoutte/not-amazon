@@ -7,6 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddressComponent } from './address/address.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { PostProductComponent } from './post-product/post-product.component';
+import { MyProductsComponent } from './my-products/my-products.component';
 
 import { AuthGuardService } from './auth-guard.service';
 
@@ -14,6 +17,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'categories',
+    component: CategoriesComponent
   },
   {
     path: 'register',
@@ -38,6 +45,16 @@ const routes: Routes = [
   {
     path: 'profile/address',
     component: AddressComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'profile/postproduct',
+    component: PostProductComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'profile/myproducts',
+    component: MyProductsComponent,
     canActivate: [AuthGuardService]
   },
   {
