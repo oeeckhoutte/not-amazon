@@ -44,6 +44,8 @@
           <li class="nav-item ml-0 ml-md-2">
             <a (click)="collopse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
               <i class="fa fa-shopping-cart"></i>
+              Cart
+              <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
             </a>
           </li>
         </ul>

@@ -1,5 +1,9 @@
 $main: #232f3e;
 
+*:focus {
+  outline: none;
+}
+
 .bg-main {
   background-color: $main;
 }
