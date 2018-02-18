@@ -7,7 +7,8 @@ const express = require('express'),
 
 const userRoutes = require('./routes/account'),
 	mainRoutes = require('./routes/main'),
-	sellerRoutes = require('./routes/seller');
+	sellerRoutes = require('./routes/seller'),
+	searchRoutes = require('./routes/search');
 
 const app = express();
 
@@ -21,6 +22,7 @@ const port = process.env.PORT || 3000;
 app.use('/api', mainRoutes);
 app.use('/api/accounts', userRoutes);
 app.use('/api/seller', sellerRoutes);
+app.use('/api/search', searchRoutes);
 
 app.get('*', (req, res) => res.json({ hello: 'world' }));
 app.listen(port, () => console.log(`Server started on port ${port}`));
