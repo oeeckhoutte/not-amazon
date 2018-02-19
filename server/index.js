@@ -5,10 +5,7 @@ const express = require('express'),
 	bodyParser = require('body-parser'),
 	cors = require('cors');
 
-const userRoutes = require('./routes/account'),
-	mainRoutes = require('./routes/main'),
-	sellerRoutes = require('./routes/seller'),
-	searchRoutes = require('./routes/search');
+const routes = require('./routes');
 
 const app = express();
 
@@ -17,12 +14,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use(cors());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
-app.use('/api', mainRoutes);
-app.use('/api/accounts', userRoutes);
-app.use('/api/seller', sellerRoutes);
-app.use('/api/search', searchRoutes);
+app.use('/api', routes.main);
+app.use('/api/accounts', routes.account);
+app.use('/api/seller', routes.seller);
+app.use('/api/search', routes.search);
+app.use('/api/categories', routes.categories);
+app.use('/api/review', routes.review);
+app.use('/api/payment', routes.payment);
 
 app.get('*', (req, res) => res.json({ hello: 'world' }));
 app.listen(port, () => console.log(`Server started on port ${port}`));
