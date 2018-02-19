@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
     this.btnDisabled = true;
     try {
       const data = await this.rest.post('http://localhost:4000/api/review', {
-        productId: this.product._id,
+        id: this.product._id,
         title: this.myReview.title,
         description: this.myReview.description,
         rating: this.myReview.rating

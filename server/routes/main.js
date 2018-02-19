@@ -160,7 +160,7 @@ router.post('/payment', auth, (req, res) => {
 	stripe.customers
 		.create({ source: stripeToken.id })
 		.then(customer =>
-			stripe.chargers.create({
+			stripe.charges.create({
 				amount: currentCharges,
 				currency: 'usd',
 				customer: customer.id

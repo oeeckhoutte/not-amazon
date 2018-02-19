@@ -71,7 +71,7 @@ export class CartComponent implements OnInit {
             }
           );
           data['success']
-            ? (this.data.clearCart(), this.data.success('Purchase Successful.'))
+            ? (this.data.clearCart(), this.data.success('Purchase Successful'))
             : this.data.error(data['message']);
         } catch (error) {
           this.data.error(error['message']);
@@ -82,14 +82,14 @@ export class CartComponent implements OnInit {
 
   validate() {
     if (!this.quantities.every(data => data > 0)) {
-      this.data.warning('Quantity cannot be less than one.');
+      this.data.warning('Quantity cannot be less than one');
     } else if (!localStorage.getItem('token')) {
       this.router.navigate(['/login']).then(() => {
-        this.data.warning('You need to login before making a purchase.');
+        this.data.warning('You need to login before making a purchase');
       });
     } else if (!this.data.user['address']) {
       this.router.navigate(['/profile/address']).then(() => {
-        this.data.warning('You need to login before making a purchase.');
+        this.data.warning('You need to login before making a purchase');
       });
     } else {
       this.data.message = '';
@@ -102,7 +102,7 @@ export class CartComponent implements OnInit {
     try {
       if (this.validate()) {
         this.handler.open({
-          name: 'Amazono',
+          name: 'Not Amazon',
           description: 'Checkout Payment',
           amount: this.cartTotal * 100,
           closed: () => {
