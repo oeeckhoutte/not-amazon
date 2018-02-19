@@ -2,7 +2,9 @@
 
 A full stack web application clone of Amazon built on the MEAN stack.
 
-![Screenshot](/media/screenshot.png)
+![Screenshot 1](/media/screenshot1.png)
+![Screenshot 2](/media/screenshot2.png)
+![Screenshot 3](/media/screenshot3.png)
 
 ### Features
 
@@ -17,6 +19,8 @@ Purchasing a product will bring up the stripe API for payment, and algolia was i
 ## Built With
 
 * [Angular 5](https://angular.io/) - JavaScript front end framework
+* [ng-bootstrap](https://ng-bootstrap.github.io/#/home) - Bootstrap 4 components for the Angular framework
+* [Sass](https://sass-lang.com/) - CSS pre-processor
 * [node.js](https://nodejs.org/en/) - JavaScript server runtime engine
 * [express](https://expressjs.com/) - Serverside web application framework for node.js
 * [JSON Web Tokens](https://jwt.io/) - A tool to encode, decode and generate stateless authentication
