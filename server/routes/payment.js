@@ -5,13 +5,13 @@ const router = require('express').Router(),
 
 router.post('/', auth, (req, res) => {
 	const stripeToken = req.body.stripeToken;
-	const currentCharges = Math.round(req.body.totalPrice * 100);
+	const currentCharges = Math.round(req.body.totalPrice);
 
 	stripe.customers
 		.create({ source: stripeToken.id })
 		.then(customer =>
 			stripe.charges.create({
-				amount: currentCharges,
+				amount: currentCharges * 100,
 				currency: 'usd',
 				customer: customer.id
 			})

@@ -1,3 +1,46 @@
-<p>
-  order works!
-</p>
+<section id="order">
+  <div class="container-fluid p-5">
+    <app-message></app-message>
+    <div *ngIf="!order" class="m-auto">
+      <h1 class="text-center display-3 mt-5">
+        <i class="fa fa-spinner fa-spin"></i>
+      </h1>
+    </div>
+    <div *ngIf="order">
+      <h3 class="display-4">Order #{{ order._id }}</h3>
+      <h5 class="text-right">Total Price:
+        <span class="ml-1 font-weight-bold text-danger">{{ order.totalPrice | currency }}</span>
+      </h5>
+      <hr class="mt-0">
+      <div *ngFor="let product of order.products">
+        <div class="row">
+          <div class="col-lg-4">
+            <img [src]="product.product.image" alt="productImage" class="image img-thumbnail">
+          </div>
+          <div class="col-lg-5">
+            <div class="row">
+              <div class="col-6">
+                <h4>
+                  <a routerLink="/product/{{product.product._id}}">
+                    {{ product.product.title }}
+                  </a>
+                </h4>
+                <p class="m-0">
+                  <small>by {{ product.product.owner.name }}</small>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <p class="lead">{{ product.product.description }}</p>
+          </div>
+          <div class="col-lg-3">
+            <p>Quantity: {{product.quantity}}</p>
+            <br>
+            <h5>Price:
+              <span class="ml-1 font-weight-bold text-danger">
+                {{ product.product.price | currency }}
+              </span>
+            </h5>
+          </div>
+        </div>
+      </div>

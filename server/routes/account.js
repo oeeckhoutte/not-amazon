@@ -156,7 +156,7 @@ router.get('/orders/:id', auth, (req, res) => {
 				});
 			} else {
 				res.json({
-					sucess: true,
+					success: true,
 					message: 'Your orders',
 					order
 				});
