@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express'),
+	path = require('path'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	cors = require('cors');
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const port = process.env.PORT || 4000;
 
@@ -24,5 +26,7 @@ app.use('/api/categories', routes.categories);
 app.use('/api/review', routes.review);
 app.use('/api/payment', routes.payment);
 
-app.get('*', (req, res) => res.json({ hello: 'world' }));
+app.get('*', (req, res) =>
+	res.sendFile(path.join(__dirname, '/public/index.html'))
+);
 app.listen(port, () => console.log(`Server started on port ${port}`));
