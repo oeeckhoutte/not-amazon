@@ -124,4 +124,44 @@ router
 		});
 	});
 
+router.get('/orders', auth, (req, res) => {
+	db.Order.find({ owner: req.decoded._id })
+		.populate('products.product')
+		.populate('owner')
+		.exec((err, orders) => {
+			if (err) {
+				res.json({
+					success: false,
+					message: `Couldn't find your order`
+				});
+			} else {
+				res.json({
+					success: true,
+					message: 'Your orders',
+					orders
+				});
+			}
+		});
+});
+
+router.get('/orders/:id', auth, (req, res) => {
+	db.Order.findById(req.params.id)
+		.deepPopulate('products.product.owner')
+		.populate('owner')
+		.exec((err, order) => {
+			if (err) {
+				res.json({
+					success: false,
+					message: `Couldn't find your order`
+				});
+			} else {
+				res.json({
+					sucess: true,
+					message: 'Your orders',
+					order
+				});
+			}
+		});
+});
+
 module.exports = router;

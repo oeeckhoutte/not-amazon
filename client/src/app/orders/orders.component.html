@@ -1,0 +1,56 @@
+<section id="orders">
+  <div class="container p-5">
+    <app-message></app-message>
+    <div *ngIf="!orders" class="m-auto">
+      <h1 class="text-center display-3 mt-5">
+        <i class="fa fa-spinner fa-spin"></i>
+      </h1>
+    </div>
+    <h3 *ngIf="orders && !orders.length" class="display-2 text-center mt-5">You Have No Orders</h3>
+    <div *ngIf="orders && orders.length" class="row">
+      <div class="col">
+        <h3 class="display-4">My Orders</h3>
+        <div *ngFor="let order of orders">
+          <div class="row">
+            <div class="offset-8 col-2 d-none d-md-block">
+              <p>
+                <small class="text-muted">Price</small>
+              </p>
+            </div>
+            <div class="col-2 d-none d-md-block">
+              <p>
+                <small class="text-muted">Quantity</small>
+              </p>
+            </div>
+          </div>
+          <hr class="mt-0">
+          <div *ngFor="let product of order.products">
+            <div class="row">
+              <div class="col-4 col-md-2">
+                <a routerLink="/product/{{ product.product._id }}">
+                  <img src="{{ product.product.image }}" alt="productImage" class="img-fluid img-thumbnail">
+                </a>
+              </div>
+              <div class="col-5 col-md-6">
+                <h4>
+                  <a routerLink="/product/{{ product.product._id }}">{{ product.product.title }}</a>
+                </h4>
+                <p class="lead"> {{product.product.description}} </p>
+              </div>
+              <div class="col-1 col-md-2">
+                <h6 class="font-weight-bold text-danger">{{ product.product.price | currency }}</h6>
+              </div>
+              <div class="col-1 mt-5 mt-md-0 p-0">
+                <p class="lead text-center">{{product.quantity}}</p>
+              </div>
+            </div>
+          </div>
+          <hr class="mt-0">
+          <h5 class="text-right">Total Price:
+            <span class="ml-1 font-weight-bold text-danger">{{ order.totalPrice | currency }}</span>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
