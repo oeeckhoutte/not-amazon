@@ -12,9 +12,25 @@ Web API created by the mongoDB database and relayed through a node.js/express se
 The application allows new users to sign up/login as a seller to list products. Any user can purchase a product, but only sellers can list items.
 Purchasing a product will bring up the stripe API for payment, and algolia was incorporated for searching through the database for products by name.
 
-<!-- ### Installing -->
+### Getting Started
 
-<!-- ## Deployment -->
+Include a `.env` file in the `server` directory with the following environment variables.
+
+```
+PORT = 4000
+DATABASE_URL =
+SECRET =
+
+ALGOLIA_ID =
+ALGOLIA_INDEX =
+ALGOLIA_KEY =
+
+AWS_BUCKET =
+AWS_KEY =
+AWS_SECRET =
+
+STRIPE_SECRET =
+```
 
 ## Built With
 
@@ -26,8 +42,5 @@ Purchasing a product will bring up the stripe API for payment, and algolia was i
 * [JSON Web Tokens](https://jwt.io/) - A tool to encode, decode and generate stateless authentication
 * [mongoDB](https://www.mongodb.com/) - NoSQL/non-relational database
 * [algolia](https://www.algolia.com/) - A real time search platform to search through a large data collection
-* [stripe](https://stripe.com/) -Payment processing API for handling business transactions
-
-## Authors
-
-* **Kelvin Mai** - [kelvin-mai](https://github.com/kelvin-mai/)
+* [stripe](https://stripe.com/) - Payment processing API for handling business transactions
+* [AWS S3](https://aws.amazon.com/s3/) - Object storage built to store and retrieve any amount of data from anywhere
